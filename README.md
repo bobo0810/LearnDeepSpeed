@@ -10,9 +10,9 @@
 - [cifar示例](training/cifar/README.md)
   - 基于DeepSpeed的训练
   - MoE用法
-
 - [pipeline_parallelism示例](training/pipeline_parallelism)
-  - 流水并行用法
+  - 流水并行的训练pipeline
+  - 流水模型的保存、加载、指标评估（本仓库独有）
 
 
 
