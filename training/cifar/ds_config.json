@@ -1,6 +1,6 @@
 {
-  "train_batch_size": 16,
-  "steps_per_print": 2000,
+  "train_batch_size": 16, //等效的总batch
+  "steps_per_print": 2000, //每训练多少步打印一次
   "optimizer": {
     "type": "Adam",
     "params": {
@@ -14,33 +14,38 @@
     }
   },
   "scheduler": {
-    "type": "WarmupLR",
+    "type": "WarmupLR", //学习率调度器  预热后保持学习率不变
     "params": {
       "warmup_min_lr": 0,
       "warmup_max_lr": 0.001,
       "warmup_num_steps": 1000
     }
   },
-  "gradient_clipping": 1.0,
-  "prescale_gradients": false,
+  "gradient_clipping": 1.0, //梯度裁剪
+  "prescale_gradients": false, //是否对梯度进行预缩放
   "fp16": {
-      "enabled": true,
-      "fp16_master_weights_and_grads": false,
-      "loss_scale": 0,
-      "loss_scale_window": 500,
-      "hysteresis": 2,
-      "min_loss_scale": 1,
-      "initial_scale_power": 15
+    "enabled": true, //开启混合精度or半精度
+    "fp16_master_weights_and_grads": false,
+    "loss_scale": 0,
+    "loss_scale_window": 500,
+    "hysteresis": 2,
+    "min_loss_scale": 1,
+    "initial_scale_power": 15
   },
-  "wall_clock_breakdown": false,
-  "zero_optimization": {
-      "stage": 0,
-      "allgather_partitions": true,
-      "reduce_scatter": true,
-      "allgather_bucket_size": 50000000,
-      "reduce_bucket_size": 50000000,
-      "overlap_comm": true,
-      "contiguous_gradients": true,
-      "cpu_offload": false
+  "wall_clock_breakdown": false, //统计并打印“前向/反向/更新”各阶段耗时
+  "zero_optimization": { //ZeRO优化配置
+    "stage": 0, //0表示不开启ZeRO优化  1表示划分优化器状态  2表示划分优化器状态和梯度 3表示划分优化器状态、梯度和参数
+    "allgather_partitions": true,
+    "reduce_scatter": true,
+    "allgather_bucket_size": 50000000,
+    "reduce_bucket_size": 50000000,
+    "overlap_comm": true,
+    "contiguous_gradients": true,
+    "cpu_offload": false //即将废弃 请使用offload_optimizer
+  },
+  "tensorboard": {
+    "enabled": true, //开启可视化
+    "output_path": "log/", //可视化文件保存路径
+    "job_name": "2023年08月15日17:29:21" //此次实验名称，作为子文件夹
   }
 }

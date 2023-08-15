@@ -130,7 +130,7 @@ if torch.distributed.get_rank() != 0:
 
 # 初始化数据集   如果不存在，则自动下载
 trainset = torchvision.datasets.CIFAR10(
-    root="./data", train=True, download=True, transform=transform
+    root="../../data", train=True, download=True, transform=transform
 )
 
 if torch.distributed.get_rank() == 0:
@@ -144,7 +144,7 @@ trainloader = torch.utils.data.DataLoader(
 )
 
 testset = torchvision.datasets.CIFAR10(
-    root="./data", train=False, download=True, transform=transform
+    root="../../data", train=False, download=True, transform=transform
 )
 testloader = torch.utils.data.DataLoader(
     testset, batch_size=4, shuffle=False, num_workers=2

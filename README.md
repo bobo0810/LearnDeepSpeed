@@ -8,7 +8,7 @@
 # 最小示例
 
 - [cifar示例](training/cifar/README.md)
-  - 基于DeepSpeed的训练
+  - 分布式数据并行DDP的训练pipeline
   - MoE用法
 - [pipeline_parallelism示例](training/pipeline_parallelism)
   - 流水并行的训练pipeline
@@ -29,6 +29,14 @@
   }
   ```
   参考 [Link](https://www.deepspeed.ai/docs/config-json/#monitoring-module-tensorboard-wandb-csv)
+- ZeRO零冗余优化器
+  ```txt
+  stage0: 禁用ZeRO优化
+  stage1: 划分优化器状态
+  stage2: 划分优化器状态＋梯度
+  stage3: 划分优化器状态＋梯度＋模型参数
+  ```
+
 
 
 
