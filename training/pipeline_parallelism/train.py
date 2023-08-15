@@ -19,8 +19,9 @@ import deepspeed.comm as dist
 
 def cifar_set(
     local_rank,
-    cifar_path="training/cifar/data",
+    cifar_path="../../data",
 ):
+    assert os.path.isdir(cifar_path), f"Please download CIFAR10 to {cifar_path}"
     transform = transforms.Compose(
         [
             transforms.Resize(256),

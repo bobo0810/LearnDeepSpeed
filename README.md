@@ -5,21 +5,30 @@
 
 
 
-# 源码注释
+# 最小示例
 
 - [cifar示例](training/cifar/README.md)
   - 基于DeepSpeed的训练
   - MoE用法
 - [pipeline_parallelism示例](training/pipeline_parallelism)
   - 流水并行的训练pipeline
-  - 流水模型的保存、加载、指标评估（本仓库独有）
+  - 流水模型的保存、加载、指标评估
+  - TensorBoard可视化
 
 
 
-## 配置参数
-
-![img.png](assets/img.png)
-
+## 配置文件
+- 等效batch计算
+  ![img.png](assets/img.png)
+- TensorBoard可视化
+  ```json
+  "tensorboard": {
+    "enabled": true,  //开启可视化
+    "output_path": "log/", //可视化文件保存路径
+    "job_name": "2023年08月15日16:28:06" //此次实验名称，作为子文件夹
+  }
+  ```
+  参考 [Link](https://www.deepspeed.ai/docs/config-json/#monitoring-module-tensorboard-wandb-csv)
 
 
 
