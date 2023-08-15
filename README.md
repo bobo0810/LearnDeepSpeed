@@ -10,6 +10,8 @@
 - [cifar示例](training/cifar/README.md)
   - 分布式数据并行DDP的训练pipeline
   - MoE用法
+  - 学习率调度器的配置
+  - ZeRO零冗余优化器的配置
 - [pipeline_parallelism示例](training/pipeline_parallelism)
   - 流水并行的训练pipeline
   - 流水模型的保存、加载、指标评估

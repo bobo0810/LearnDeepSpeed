@@ -14,11 +14,12 @@
     }
   },
   "scheduler": {
-    "type": "WarmupLR", //学习率调度器  预热后保持学习率不变
+    "type": "WarmupLR", //WarmupLR:预热后保持学习率不变    WarmupDecayLR:预热后学习率线性衰减
     "params": {
       "warmup_min_lr": 0,
       "warmup_max_lr": 0.001,
-      "warmup_num_steps": 1000
+      "warmup_num_steps": 1000,
+      "warmup_type": "linear" //预热类型  cosine:余弦   linear:线性
     }
   },
   "gradient_clipping": 1.0, //梯度裁剪
@@ -41,11 +42,14 @@
     "reduce_bucket_size": 50000000,
     "overlap_comm": true,
     "contiguous_gradients": true,
-    "cpu_offload": false //即将废弃 请使用offload_optimizer
+    "offload_optimizer": { //是否将优化器状态放入CPU或NVMe  优化器计算只能放在CPU  适用于ZeRO stage 1, 2, 3.
+      "device": "cpu", //auto表示自动选择CPU或NVMe  cpu表示放在CPU  nvme表示放在NVMe
+      "pin_memory": true, //是否放入CPU的固定内存,以加速传输
+    },
   },
   "tensorboard": {
     "enabled": true, //开启可视化
     "output_path": "log/", //可视化文件保存路径
-    "job_name": "2023年08月15日17:29:21" //此次实验名称，作为子文件夹
+    "job_name": "2023年08月15日20:44:31" //此次实验名称，作为子文件夹
   }
 }

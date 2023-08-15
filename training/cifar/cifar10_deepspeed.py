@@ -292,7 +292,7 @@ criterion = nn.CrossEntropyLoss()  # 定义损失函数
 # We simply have to loop over our data iterator, and feed the inputs to the
 # network and optimize.
 
-for epoch in range(2):  # loop over the dataset multiple times 遍历N轮数据集
+for epoch in range(args.epochs):  # loop over the dataset multiple times 遍历N轮数据集
     running_loss = 0.0
     for i, data in enumerate(trainloader):
         # get the inputs; data is a list of [inputs, labels]
