@@ -19,7 +19,7 @@ import deepspeed.comm as dist
 
 def cifar_set(
     local_rank,
-    dl_path="DeepSpeedExamples/training/cifar/data",
+    cifar_path="training/cifar/data",
 ):
     transform = transforms.Compose(
         [
@@ -37,10 +37,10 @@ def cifar_set(
     if local_rank != 0:
         dist.barrier()
     trainset = torchvision.datasets.CIFAR10(
-        root=dl_path, train=True, download=True, transform=transform
+        root=cifar_path, train=True, download=True, transform=transform
     )
     testset = torchvision.datasets.CIFAR10(
-        root=dl_path, train=False, download=True, transform=transform
+        root=cifar_path, train=False, download=True, transform=transform
     )
     if local_rank == 0:
         dist.barrier()
@@ -181,7 +181,6 @@ def train_pipe(args, part="parameters"):
             (loss, output) = result
             print("loss---->", loss)
             print("output.shape---->", output.shape)
-            print("output---->", output)
 
     # ---------------------- 模型保存 ----------------------
     # 保存PP模型
@@ -211,10 +210,10 @@ def train_pipe(args, part="parameters"):
             (test_loss, test_output) = test_result
             print("test_loss---->", test_loss)
             print("test_output.shape---->", test_output.shape)
-            print("test_output---->", test_output)
 
-            print("loss diff---->", torch.sum(test_loss - loss))
-            print("output diff---->", torch.sum(test_output - output))
+            # 判断模型加载是否正确
+            assert torch.allclose(test_loss, loss, atol=1e-4), "错误: loss结果相差过大"
+            assert torch.allclose(test_output, output, atol=1e-4), "错误: output结果相差过大"
 
 
 if __name__ == "__main__":
