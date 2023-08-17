@@ -19,7 +19,7 @@
 
 
 
-## 配置文件
+## 配置
 - 等效batch计算
   ![img.png](assets/img.png)
 - TensorBoard可视化
@@ -37,6 +37,22 @@
   stage1: 划分优化器状态
   stage2: 划分优化器状态＋梯度
   stage3: 划分优化器状态＋梯度＋模型参数
+  ```
+- 指定GPU运行
+  ```shell
+  # 本机第0张卡
+  deepspeed --include="localhost:0"  xxx.py --deepspeed --deepspeed_config xxx.json
+  ```
+- 模型加载&评估
+  ```python
+  state_dict = torch.load("xxx.pt",map_location=torch.device('cpu'))["module"]
+  model = resnet50()
+  model.load_state_dict(state_dict)
+
+  # 评估
+  model.eval()
+  with torch.no_grad():
+      outputs = model(inputs)
   ```
 
 
