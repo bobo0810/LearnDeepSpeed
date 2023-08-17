@@ -54,9 +54,21 @@
   with torch.no_grad():
       outputs = model(inputs)
   ```
+- 两种传参格式
+  1. 配置文件
+  ```shell
+  deepspeed  train.py --deepspeed  --deepspeed_config ds_config.json
+  ```
 
-
-
+  2. 配置参数
+  ```python
+  # bash 
+  ds_config = {"train_batch_size": 16}
+  engine, _, _, _ = deepspeed.initialize(model=netconfig=ds_config)
+  ```
+  ```shell
+  deepspeed  train.py --deepspeed 
+  ```
 
 
 # 参考
