@@ -294,6 +294,7 @@ criterion = nn.CrossEntropyLoss()  # 定义损失函数
 
 for epoch in range(args.epochs):  # loop over the dataset multiple times 遍历N轮数据集
     running_loss = 0.0
+    model_engine.train()
     for i, data in enumerate(trainloader):
         # get the inputs; data is a list of [inputs, labels]
         # deepspeed封装后的data是一个list
@@ -333,6 +334,7 @@ print("Finished Training")
 # correct, we add the sample to the list of correct predictions.
 #
 # Okay, first step. Let us display an image from the test set to get familiar.
+model_engine.eval()
 
 dataiter = iter(testloader)
 images, labels = next(dataiter)
