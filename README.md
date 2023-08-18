@@ -73,10 +73,10 @@
 
 # 参考
 
-- [DeepSpeed官方Git库](https://github.com/microsoft/DeepSpeed)  
+- [官方Git库](https://github.com/microsoft/DeepSpeed)  
 
-- [DeepSpeed官方文档](https://www.deepspeed.ai/getting-started/) 
+- [官方文档](https://www.deepspeed.ai/getting-started/) 
 
-- [DeepSpeed官方示例库](https://github.com/microsoft/DeepSpeedExamples)  
+- [官方示例库](https://github.com/microsoft/DeepSpeedExamples)  
 
-- [DeepSpeed基础用法](https://github.com/microsoft/DeepSpeedExamples/blob/master/training/HelloDeepSpeed/README.md) 
+- [DeepSpeed入门教程](https://zhuanlan.zhihu.com/p/630734624)   
