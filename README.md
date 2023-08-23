@@ -38,6 +38,7 @@
   stage2: 划分优化器状态＋梯度
   stage3: 划分优化器状态＋梯度＋模型参数
   ```
+  ![Alt text](assets/zero.png)
 - 指定GPU运行
   ```shell
   # 本机第0张卡
@@ -69,6 +70,18 @@
   ```shell
   deepspeed  train.py --deepspeed 
   ```
+- AMP自动混合精度
+  > 注：与FP16、ZeRO不兼容
+  ```json
+  "amp": {
+    "enabled": true, //是否开启混合精度训练
+    "opt_level": "O1", //优化级别
+  }
+  ```
+  - O0：纯FP32训练
+  - O1：混合精度训练（推荐），根据黑白名单自动决定使用FP16（对 Tensor Core 友好的操作, 如GEMM, 卷积）还是FP32（Softmax）进行计算。
+  - O2：“几乎FP16”混合精度训练，不存在黑白名单，除了BN，几乎都是用FP16计算。
+  - O3：纯FP16训练，很不稳定。
 
 
 # 参考
@@ -80,3 +93,5 @@
 - [官方示例库](https://github.com/microsoft/DeepSpeedExamples)  
 
 - [DeepSpeed入门教程](https://zhuanlan.zhihu.com/p/630734624)   
+
+- [训练加速 半精度+分布式](https://zhuanlan.zhihu.com/p/571023680)
