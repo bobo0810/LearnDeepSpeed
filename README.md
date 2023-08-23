@@ -45,6 +45,12 @@
   deepspeed --include="localhost:0"  xxx.py --deepspeed --deepspeed_config xxx.json
   ```
 - 模型加载&评估
+  
+  第一种：deepspeed推理引擎
+
+  https://www.deepspeed.ai/tutorials/inference-tutorial/
+
+  第二种：torch原生加载
   ```python
   state_dict = torch.load("xxx.pt",map_location=torch.device('cpu'))["module"]
   model = resnet50()
@@ -55,6 +61,7 @@
   with torch.no_grad():
       outputs = model(inputs)
   ```
+
 - 两种传参格式
   1. 配置文件
   ```shell
